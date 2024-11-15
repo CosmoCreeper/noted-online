@@ -1,5 +1,6 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { useCallback, useEffect, useRef } from 'react';
+import React from 'react';
 import { useLocalStorage } from '@uidotdev/usehooks';
 
 // Global CSS.
@@ -9,7 +10,7 @@ import './css/themes.css';
 // Components.
 import Header from './components/header';
 import Settings from './components/settings';
-import Content from './components/contents';
+import Content from './contents';
 
 // Colors.
 const COLORS = ['yellow', 'green', 'pink', 'purple', 'blue'];
@@ -17,7 +18,6 @@ const COLORS = ['yellow', 'green', 'pink', 'purple', 'blue'];
 const Main = () => {
   const [dayReset, setDayReset] = useLocalStorage("dayreset", true);
   const [currColorIdx, setCurrColorIdx] = useLocalStorage("coloridx", 0);
-  const [bootOnStartup, setBootOnStartup] = useLocalStorage("bootonstartup", false);
   const [soundEnabled, setSoundEnabled] = useLocalStorage("soundenabled", true);
   const [sound, setSound] = useLocalStorage("sound", "doorbell");
   const [customSound, setCustomSound] = useLocalStorage("customsound", "");
@@ -60,7 +60,7 @@ const Main = () => {
               customSound={customSound} confettiEnabled={confettiEnabled} moreLineSpace={moreLineSpace} headerRef={headerRef} />} 
             />
 
-            <Route path="/settings" element={<Settings dayReset={dayReset} setDayReset={setDayReset} bootOnStartup={bootOnStartup} setBootOnStartup={setBootOnStartup}
+            <Route path="/settings" element={<Settings dayReset={dayReset} setDayReset={setDayReset}
               soundEnabled={soundEnabled} setSoundEnabled={setSoundEnabled} sound={sound} setSound={setSound} customSound={customSound} setCustomSound={setCustomSound}
               confettiEnabled={confettiEnabled} setConfettiEnabled={setConfettiEnabled} moreLineSpace={moreLineSpace} setMoreLineSpace={setMoreLineSpace} />} 
             />

@@ -2,6 +2,7 @@ import { ChangeEvent, useState, memo, useRef, useEffect, useCallback } from 'rea
 import { getDate } from 'timedated';
 import { confetti } from '@tsparticles/confetti';
 import { useLocalStorage } from '@uidotdev/usehooks';
+import React from 'react';
 
 type ContentProps = {
   dayReset: boolean;
@@ -194,10 +195,11 @@ const Content = (
       
       // Define sound to be played with its src.
       try {
-        let path = require(`../../../assets/sounds/${soundPreset}/${sound === "Custom" ? `${customSound}/` : ""}${eventType}.mp3`).default;
-        new Audio(path).play();
+        const audioPath = await import(`../sounds/${soundPreset}/${sound === "Custom" ? `${customSound}/` : ""}${eventType}.mp3`);
+        console.log(audioPath, `../../sounds/${soundPreset}/${sound === "Custom" ? `${customSound}/` : ""}${eventType}.mp3`);
+        new Audio(audioPath).play();
       } catch (err) {
-        console.log("Audio not found.");
+        console.log("Audio not found.", err);
       }
     }
 
